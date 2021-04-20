@@ -22,7 +22,7 @@ interface totalizadores {
   /** Valor total do FCP retido anteriormente por substituição tributária. */
   vFCPSTRet_W06b: number;
   /** Valor total dos produtos e serviços. */
-  vProd_W07: number;
+  vProd_W07: string;
   /** Valor total do frete. */
   vFrete_W08: number;
   /** Valor total do seguro. */
@@ -42,7 +42,7 @@ interface totalizadores {
   /** Valor total de outras despesas. */
   vOutro_W15: number;
   /** Valor total da NF-e. */
-  vNF_W16: number;
+  vNF_W16: string;
   /** Valor aproximado total de tributos federais, estaduais e municipais. */
   vTotTrib_W16a: number;
   /** Modalidade do frete. */
@@ -50,5 +50,4 @@ interface totalizadores {
   /** Informações complementares de interesse contribuinte. */
   infCpl_Z03: number;
 }
-
 export default totalizadores;
