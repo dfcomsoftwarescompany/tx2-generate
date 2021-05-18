@@ -11,7 +11,7 @@ import Tecnico from './interfaces/tecnico.interface';
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
  */
-export declare const sendNFCe: (tx2Path: string, cnpj: string, grupo: string, authorization: string) => Promise<String>;
+export declare const sendNFCe: (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string) => Promise<String>;
 /**
  * Envia o arquivo tx2 para a api da tecnospeed e retorna a resposta.
  * @param tx2Path o caminho para o arquivo tx2
@@ -19,7 +19,7 @@ export declare const sendNFCe: (tx2Path: string, cnpj: string, grupo: string, au
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
  */
-export declare const sendNFe: (tx2Path: string, cnpj: string, grupo: string, authorization: string) => Promise<String>;
+export declare const sendNFe: (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string) => Promise<String>;
 /**
  * Gera o conteúdo para impressão da nota fiscal.
  * @param authorization a string de autorização para acessar a api da tecnospeed
@@ -28,7 +28,7 @@ export declare const sendNFe: (tx2Path: string, cnpj: string, grupo: string, aut
  * @param group nome do grupo
  * @param cnpj cnpj da empresa emitente.
  */
-export declare const print: (authorization: string, key: string, url: 0 | 1, group: string, cnpj: string) => Promise<String>;
+export declare const print: (authorization: string, key: string, url: 0 | 1, group: string, cnpj: string, port: string) => Promise<String>;
 /**
  * Generates a random string to complement the cNF_B03 value.
  */
@@ -54,7 +54,7 @@ export declare const generateNFCeTx2: (caminhoTx2: string, dadosNota: DadosNota,
  * @param justify a string justifying the cancel reason
  * @returns
  */
-export declare const cancelNFCe: (authorization: string, group: string, cnpj: string, nfceKey: string, justify: string) => Promise<String>;
+export declare const cancelNFCe: (authorization: string, group: string, cnpj: string, nfceKey: string, justify: string, port: string) => Promise<String>;
 /**
  * Gera o arquivo tx2 (para NFe) no caminho especificado.
  * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)

@@ -109,7 +109,7 @@ const createTecnico = (caminhoTx2: string, tecnico: any) => {
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
  */
-export const sendNFCe = (tx2Path: string, cnpj: string, grupo: string, authorization: string): Promise<String> => {
+export const sendNFCe = (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string): Promise<String> => {
   return new Promise((resolve, reject) => {
     const form = {
       CNPJ: cnpj,
@@ -125,7 +125,7 @@ export const sendNFCe = (tx2Path: string, cnpj: string, grupo: string, authoriza
           'Content-Length': contentLength,
           Authorization: authorization,
         },
-        url: 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfce/envia',
+        url: `https://managersaas.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/envia`,
         method: 'POST',
         body: formData,
       },
@@ -146,7 +146,7 @@ export const sendNFCe = (tx2Path: string, cnpj: string, grupo: string, authoriza
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
  */
-export const sendNFe = (tx2Path: string, cnpj: string, grupo: string, authorization: string): Promise<String> => {
+export const sendNFe = (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string): Promise<String> => {
   return new Promise((resolve, reject) => {
     const form = {
       CNPJ: cnpj,
@@ -162,7 +162,7 @@ export const sendNFe = (tx2Path: string, cnpj: string, grupo: string, authorizat
           'Content-Length': contentLength,
           Authorization: authorization,
         },
-        url: 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfe/envia',
+        url: `https://managersaas.tecnospeed.com.br:${port}/ManagerAPIWeb/nfe/envia`,
         method: 'POST',
         body: formData,
       },
@@ -190,6 +190,7 @@ export const print = async (
   url: 0 | 1,
   group: string,
   cnpj: string,
+  port: string
 ): Promise<String> => {
   return new Promise((resolve, reject) => {
     const form = {
@@ -203,7 +204,7 @@ export const print = async (
         headers: {
           Authorization: authorization,
         },
-        url: 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfce/imprime',
+        url: `https://managersaas.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/imprime`,
         method: 'GET',
         qs: form,
       },
@@ -283,6 +284,7 @@ export const cancelNFCe = (
   cnpj: string,
   nfceKey: string,
   justify: string,
+  port: string
 ): Promise<String> => {
   return new Promise((resolve, reject) => {
     try {
@@ -297,7 +299,7 @@ export const cancelNFCe = (
           headers: {
             Authorization: authorization,
           },
-          url: 'https://managersaas.tecnospeed.com.br:8081/ManagerAPIWeb/nfce/cancela',
+          url: `https://managersaas.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/cancela`,
           method: 'POST',
           qs: form,
         },
