@@ -18,6 +18,8 @@ export declare const sendNFCe: (tx2Path: string, cnpj: string, grupo: string, au
  * @param cnpj o cnpj da empresa emitente
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
+ * @param port porta da tecnospeed (7071 - homologação ou 8081 - produção).
+ * @param amb ambiente a ser concatenado no final da url ("hom" - homologação ou "" - produção)
  */
 export declare const sendNFe: (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string, amb: string) => Promise<String>;
 /**
@@ -27,6 +29,8 @@ export declare const sendNFe: (tx2Path: string, cnpj: string, grupo: string, aut
  * @param url 0 = conteúdo binário de pdf, 1 = url para download do pdf.
  * @param group nome do grupo
  * @param cnpj cnpj da empresa emitente.
+ * * @param port porta da tecnospeed (7071 - homologação ou 8081 - produção).
+ * @param amb ambiente a ser concatenado no final da url ("hom" - homologação ou "" - produção)
  */
 export declare const print: (authorization: string, key: string, url: 0 | 1, group: string, cnpj: string, port: string, amb: string) => Promise<String>;
 /**
@@ -65,6 +69,8 @@ export declare const cancelNFCe: (authorization: string, group: string, cnpj: st
  * @param pagamentos um array contendo as informações das formas de pagamento utilizadas.
  * @param totalizadores um objeto contendo os dados dos totalizadores.
  * @param tecnico um objeto contendo as informações do responsável técnico.
+ * * @param port porta da tecnospeed (7071 - homologação ou 8081 - produção).
+ * @param amb ambiente a ser concatenado no final da url ("hom" - homologação ou "" - produção)
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
 export declare const generateNFeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, dadosDestinatario: DadosDestinatario, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico) => Promise<unknown>;
