@@ -1,6 +1,6 @@
 {
   "name": "tx2-helper",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "TX2 Helper Generator",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
