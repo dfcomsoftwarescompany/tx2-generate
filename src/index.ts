@@ -91,7 +91,11 @@ const createTotalizadores = (caminhoTx2: string, totalizadores: any) => {
 
 const createAuthGetXml = (caminhoTx2: string, cnpj: string = '', cpf: string = '') => {
   return new Promise((resolve) => {
-    fs.appendFileSync(caminhoTx2, `INCLUIRPARTE=AUTXML\nCNPJ_GA02=${cnpj}\nCPF_GA03=${cpf}\nSALVARPARTE=AUTXML`);
+    if (cnpj || cpf)
+      fs.appendFileSync(
+        caminhoTx2,
+        `\nINCLUIRPARTE=AUTXML\n${cnpj && `CNPJ_GA02=${cnpj}\n`}${cpf && `CPF_GA03=${cpf}\n`}SALVARPARTE=AUTXML`,
+      );
     resolve('Dados do pagamento criados com sucesso.');
   });
 };
