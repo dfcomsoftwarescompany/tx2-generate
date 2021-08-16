@@ -263,6 +263,7 @@ export const generatecNF_B03 = (): Promise<string> => {
  * @param pagamentos um array contendo as informações das formas de pagamento utilizadas.
  * @param totalizadores um objeto contendo os dados dos totalizadores.
  * @param tecnico um objeto contendo as informações do responsável técnico.
+ * @param cnpjAutorizado Autorização para obter XML
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
 export const generateNFCeTx2 = (
@@ -273,6 +274,8 @@ export const generateNFCeTx2 = (
   pagamentos: Array<any>,
   totalizadores: Totalizadores,
   tecnico: Tecnico,
+  cnpjAutorizado: string,
+  cpfAutorizado: string,
 ): Promise<string> => {
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(caminhoTx2)) {
@@ -282,6 +285,7 @@ export const generateNFCeTx2 = (
       await createDadosNota(caminhoTx2, dadosNota);
       await createDadosEmitente(caminhoTx2, dadosEmitente);
       await createDadosItens(caminhoTx2, itens);
+      await createAuthGetXml(caminhoTx2, cnpjAutorizado, cpfAutorizado);
       await createPagamentos(caminhoTx2, pagamentos);
       await createTotalizadores(caminhoTx2, totalizadores);
       await createTecnico(caminhoTx2, tecnico);
