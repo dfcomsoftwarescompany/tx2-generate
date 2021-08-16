@@ -8,18 +8,17 @@ import Pagamento from './interfaces/pagamento.interface';
 import * as querystring from 'querystring';
 import * as fs from 'fs';
 import * as request from 'request';
-import { rejects } from 'assert';
 
 const createHeader = (caminhoTx2: string) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     fs.appendFileSync(caminhoTx2, 'formato=tx2\nnumlote=0');
     resolve('Cabeçalho criado com sucesso!');
   });
 };
 
 const createDadosNota = (caminhoTx2: string, dadosNota: any) => {
-  return new Promise((resolve, reject) => {
-    //Cabeçalho dos dados da nota.
+  return new Promise((resolve) => {
+    //  Cabeçalho dos dados da nota.
     fs.appendFileSync(caminhoTx2, '\nINCLUIR');
     const keys = Object.keys(dadosNota);
     keys.forEach((key: string) => {
@@ -30,7 +29,7 @@ const createDadosNota = (caminhoTx2: string, dadosNota: any) => {
 };
 
 const createDadosEmitente = (caminhoTx2: string, dadosEmitente: any) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const keys = Object.keys(dadosEmitente);
     keys.forEach((key: string) => {
       fs.appendFileSync(caminhoTx2, `\n${key}=${dadosEmitente[key]}`);
@@ -40,7 +39,7 @@ const createDadosEmitente = (caminhoTx2: string, dadosEmitente: any) => {
 };
 
 const createDadosDestinatario = (caminhoTx2: string, dadosDestinatario: any) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const keys = Object.keys(dadosDestinatario);
     keys.forEach((key: string) => {
       fs.appendFileSync(caminhoTx2, `\n${key}=${dadosDestinatario[key]}`);
@@ -50,8 +49,8 @@ const createDadosDestinatario = (caminhoTx2: string, dadosDestinatario: any) => 
 };
 
 const createDadosItens = (caminhoTx2: string, itens: Array<any>) => {
-  return new Promise((resolve, reject) => {
-    //Cabeçalho dos dados da nota.
+  return new Promise((resolve) => {
+    //  Cabeçalho dos dados da nota.
     itens.forEach((item) => {
       fs.appendFileSync(caminhoTx2, '\nINCLUIRITEM');
       const keys = Object.keys(item);
@@ -65,9 +64,9 @@ const createDadosItens = (caminhoTx2: string, itens: Array<any>) => {
 };
 
 const createPagamentos = (caminhoTx2: string, pagamentos: Array<any>) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     pagamentos.forEach((pagamento) => {
-      //Cabeçalho dos dados da nota.
+      //  Cabeçalho dos dados da nota.
       fs.appendFileSync(caminhoTx2, '\nINCLUIRPARTE=YA');
       const keys = Object.keys(pagamento);
       keys.forEach((key: string) => {
@@ -80,8 +79,8 @@ const createPagamentos = (caminhoTx2: string, pagamentos: Array<any>) => {
 };
 
 const createTotalizadores = (caminhoTx2: string, totalizadores: any) => {
-  return new Promise((resolve, reject) => {
-    //Cabeçalho dos dados da nota.
+  return new Promise((resolve) => {
+    // Cabeçalho dos dados da nota.
     const keys = Object.keys(totalizadores);
     keys.forEach((key: string) => {
       fs.appendFileSync(caminhoTx2, `\n${key}=${totalizadores[key]}`);
@@ -90,9 +89,16 @@ const createTotalizadores = (caminhoTx2: string, totalizadores: any) => {
   });
 };
 
+const createAuthGetXml = (caminhoTx2: string, cnpj: string = '', cpf: string = '') => {
+  return new Promise((resolve) => {
+    fs.appendFileSync(caminhoTx2, `INCLUIRPARTE=AUTXML\nCNPJ_GA02=${cnpj}\nCPF_GA03=${cpf}\nSALVARPARTE=AUTXML`);
+    resolve('Dados do pagamento criados com sucesso.');
+  });
+};
+
 const createTecnico = (caminhoTx2: string, tecnico: any) => {
-  return new Promise((resolve, reject) => {
-    //Cabeçalho dos dados da nota.
+  return new Promise((resolve) => {
+    // Cabeçalho dos dados da nota.
     const keys = Object.keys(tecnico);
     keys.forEach((key: string) => {
       fs.appendFileSync(caminhoTx2, `\n${key}=${tecnico[key]}`);
@@ -109,15 +115,22 @@ const createTecnico = (caminhoTx2: string, tecnico: any) => {
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
  */
-export const sendNFCe = (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string, amb: string): Promise<String> => {
+export const sendNFCe = (
+  tx2Path: string,
+  cnpj: string,
+  grupo: string,
+  authorization: string,
+  port: string,
+  amb: string,
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     const form = {
       CNPJ: cnpj,
       Grupo: grupo,
       Arquivo: fs.readFileSync(tx2Path, 'utf-8'),
     };
-    let formData = querystring.stringify(form);
-    let contentLength = formData.length;
+    const formData = querystring.stringify(form);
+    const contentLength = formData.length;
     request(
       {
         headers: {
@@ -125,7 +138,7 @@ export const sendNFCe = (tx2Path: string, cnpj: string, grupo: string, authoriza
           'Content-Length': contentLength,
           Authorization: authorization,
         },
-        url: `https://managersaa${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/envia`,
+        url: `https:// managersaa${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/envia`,
         method: 'POST',
         body: formData,
       },
@@ -146,15 +159,22 @@ export const sendNFCe = (tx2Path: string, cnpj: string, grupo: string, authoriza
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
  */
-export const sendNFe = (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string, amb: string): Promise<String> => {
+export const sendNFe = (
+  tx2Path: string,
+  cnpj: string,
+  grupo: string,
+  authorization: string,
+  port: string,
+  amb: string,
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     const form = {
       CNPJ: cnpj,
       Grupo: grupo,
       Arquivo: fs.readFileSync(tx2Path, 'utf-8'),
     };
-    let formData = querystring.stringify(form);
-    let contentLength = formData.length;
+    const formData = querystring.stringify(form);
+    const contentLength = formData.length;
     request(
       {
         headers: {
@@ -162,7 +182,7 @@ export const sendNFe = (tx2Path: string, cnpj: string, grupo: string, authorizat
           'Content-Length': contentLength,
           Authorization: authorization,
         },
-        url: `https://managersaas${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfe/envia`,
+        url: `https:// managersaas${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfe/envia`,
         method: 'POST',
         body: formData,
       },
@@ -191,8 +211,8 @@ export const print = async (
   group: string,
   cnpj: string,
   port: string,
-  amb: string
-): Promise<String> => {
+  amb: string,
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     const form = {
       ChaveNota: key,
@@ -205,7 +225,7 @@ export const print = async (
         headers: {
           Authorization: authorization,
         },
-        url: `https://managersaas${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/imprime`,
+        url: `https:// managersaas${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/imprime`,
         method: 'GET',
         qs: form,
       },
@@ -222,12 +242,12 @@ export const print = async (
 /**
  * Generates a random string to complement the cNF_B03 value.
  */
-export const generatecNF_B03 = (): Promise<String> => {
+export const generatecNF_B03 = (): Promise<string> => {
   return new Promise((resolve, reject) => {
-    var result = '';
-    var characters = '0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < 8; i++) {
+    let result = '';
+    const characters = '0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < 8; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     resolve(result);
@@ -253,7 +273,7 @@ export const generateNFCeTx2 = (
   pagamentos: Array<any>,
   totalizadores: Totalizadores,
   tecnico: Tecnico,
-): Promise<String> => {
+): Promise<string> => {
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(caminhoTx2)) {
       reject('Já existe um tx2 no caminho especificado.');
@@ -286,8 +306,8 @@ export const cancelNFCe = (
   nfceKey: string,
   justify: string,
   port: string,
-  amb: string
-): Promise<String> => {
+  amb: string,
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
       const form = {
@@ -301,7 +321,7 @@ export const cancelNFCe = (
           headers: {
             Authorization: authorization,
           },
-          url: `https://managersaas${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/cancela`,
+          url: `https:// managersaas${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/cancela`,
           method: 'POST',
           qs: form,
         },
@@ -328,6 +348,8 @@ export const cancelNFCe = (
  * @param pagamentos um array contendo as informações das formas de pagamento utilizadas.
  * @param totalizadores um objeto contendo os dados dos totalizadores.
  * @param tecnico um objeto contendo as informações do responsável técnico.
+ * @param cnpjAutorizado Autorização para obter XML
+ * @param cpfAutorizado Autorização para obter XML
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
 export const generateNFeTx2 = (
@@ -339,6 +361,8 @@ export const generateNFeTx2 = (
   pagamentos: Array<any>,
   totalizadores: Totalizadores,
   tecnico: Tecnico,
+  cnpjAutorizado: string,
+  cpfAutorizado: string,
 ) => {
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(caminhoTx2)) {
@@ -348,6 +372,7 @@ export const generateNFeTx2 = (
       await createDadosNota(caminhoTx2, dadosNota);
       await createDadosEmitente(caminhoTx2, dadosEmitente);
       await createDadosDestinatario(caminhoTx2, dadosDestinatario);
+      await createAuthGetXml(caminhoTx2, cnpjAutorizado, cpfAutorizado);
       await createDadosItens(caminhoTx2, itens);
       await createPagamentos(caminhoTx2, pagamentos);
       await createTotalizadores(caminhoTx2, totalizadores);

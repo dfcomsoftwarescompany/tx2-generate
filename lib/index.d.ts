@@ -65,6 +65,8 @@ export declare const cancelNFCe: (authorization: string, group: string, cnpj: st
  * @param pagamentos um array contendo as informações das formas de pagamento utilizadas.
  * @param totalizadores um objeto contendo os dados dos totalizadores.
  * @param tecnico um objeto contendo as informações do responsável técnico.
+ * @param cnpjAutorizado Autorização para obter XML
+ * @param cpfAutorizado Autorização para obter XML
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export declare const generateNFeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, dadosDestinatario: DadosDestinatario, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico) => Promise<unknown>;
+export declare const generateNFeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, dadosDestinatario: DadosDestinatario, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico, cnpjAutorizado: string, cpfAutorizado: string) => Promise<unknown>;
