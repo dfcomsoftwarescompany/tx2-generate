@@ -1,4 +1,4 @@
-interface dadosItem {
+interface DadosItem {
   /** Número do item. */
   nItem_H02: number;
   /** GTIN do produto, antigo código EAN ou código de barras. */
@@ -37,4 +37,4 @@ interface dadosItem {
   CST_N12: string;
 }
 
-export default dadosItem;
+export default DadosItem;

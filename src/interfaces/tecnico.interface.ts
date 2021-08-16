@@ -1,4 +1,4 @@
-interface tecnico {
+interface Tecnico {
   /** CNPJ da pessoa jurídica responsável pelo sistema. */
   CNPJ_ZD02: string;
   /** Nome da pessoa a ser contatada. */
@@ -9,4 +9,4 @@ interface tecnico {
   fone_ZD06: string;
 }
 
-export default tecnico;
+export default Tecnico;

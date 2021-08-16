@@ -1,4 +1,4 @@
-interface totalizadores {
+interface Totalizadores {
   /** Base de cálculo do ICMS. */
   vBC_W03: number;
   /** Valor total do ICMS. */
@@ -50,4 +50,4 @@ interface totalizadores {
   /** Informações complementares de interesse contribuinte. */
   infCpl_Z03: number;
 }
-export default totalizadores;
+export default Totalizadores;
