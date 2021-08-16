@@ -1,4 +1,4 @@
-interface dadosNota {
+interface DadosNota {
     /** Não preencher */
     Id_A03?: number | 0;
     /** Versão */
@@ -9,7 +9,7 @@ interface dadosNota {
     cNF_B03: string;
     /** Descrição da natureza da operação. */
     natOp_B04?: string | 'VENDA';
-    /** 65 = NFCe | 55 = NFe*/
+    /** 65 = NFCe | 55 = NFe */
     mod_B06?: number | 65;
     /** Cada operador do caixa vai ter sua série. */
     serie_B07: number;
@@ -44,4 +44,4 @@ interface dadosNota {
     /** Indicador de intermediador */
     indIntermed_B25c: 0;
 }
-export default dadosNota;
+export default DadosNota;

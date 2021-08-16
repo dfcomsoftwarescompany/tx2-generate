@@ -11,7 +11,7 @@ import Tecnico from './interfaces/tecnico.interface';
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
  */
-export declare const sendNFCe: (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string, amb: string) => Promise<String>;
+export declare const sendNFCe: (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string, amb: string) => Promise<string>;
 /**
  * Envia o arquivo tx2 para a api da tecnospeed e retorna a resposta.
  * @param tx2Path o caminho para o arquivo tx2
@@ -19,7 +19,7 @@ export declare const sendNFCe: (tx2Path: string, cnpj: string, grupo: string, au
  * @param grupo o nome do grupo
  * @param authorization a string de autorização para acessar a api da tecnospeed.
  */
-export declare const sendNFe: (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string, amb: string) => Promise<String>;
+export declare const sendNFe: (tx2Path: string, cnpj: string, grupo: string, authorization: string, port: string, amb: string) => Promise<string>;
 /**
  * Gera o conteúdo para impressão da nota fiscal.
  * @param authorization a string de autorização para acessar a api da tecnospeed
@@ -28,11 +28,11 @@ export declare const sendNFe: (tx2Path: string, cnpj: string, grupo: string, aut
  * @param group nome do grupo
  * @param cnpj cnpj da empresa emitente.
  */
-export declare const print: (authorization: string, key: string, url: 0 | 1, group: string, cnpj: string, port: string, amb: string) => Promise<String>;
+export declare const print: (authorization: string, key: string, url: 0 | 1, group: string, cnpj: string, port: string, amb: string) => Promise<string>;
 /**
  * Generates a random string to complement the cNF_B03 value.
  */
-export declare const generatecNF_B03: () => Promise<String>;
+export declare const generatecNF_B03: () => Promise<string>;
 /**
  * Gera o arquivo tx2 (para NFCe) no caminho especificado.
  * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
@@ -42,9 +42,10 @@ export declare const generatecNF_B03: () => Promise<String>;
  * @param pagamentos um array contendo as informações das formas de pagamento utilizadas.
  * @param totalizadores um objeto contendo os dados dos totalizadores.
  * @param tecnico um objeto contendo as informações do responsável técnico.
+ * @param cnpjAutorizado Autorização para obter XML
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export declare const generateNFCeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico) => Promise<String>;
+export declare const generateNFCeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico, cnpjAutorizado: string, cpfAutorizado: string) => Promise<string>;
 /**
  * Cancela uma NFCe.
  * @param authorization the header authrization string (base 64).
@@ -54,7 +55,7 @@ export declare const generateNFCeTx2: (caminhoTx2: string, dadosNota: DadosNota,
  * @param justify a string justifying the cancel reason
  * @returns
  */
-export declare const cancelNFCe: (authorization: string, group: string, cnpj: string, nfceKey: string, justify: string, port: string, amb: string) => Promise<String>;
+export declare const cancelNFCe: (authorization: string, group: string, cnpj: string, nfceKey: string, justify: string, port: string, amb: string) => Promise<string>;
 /**
  * Gera o arquivo tx2 (para NFe) no caminho especificado.
  * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)

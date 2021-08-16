@@ -1,4 +1,4 @@
-interface dadosEmitente {
+interface DadosEmitente {
     /** CNPJ do emitente. */
     CNPJ_C02: string;
     /** Razão social ou nome do emitente. */
@@ -34,4 +34,4 @@ interface dadosEmitente {
     /** Código do regime tributário. */
     CRT_C21: number | 1;
 }
-export default dadosEmitente;
+export default DadosEmitente;
