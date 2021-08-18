@@ -329,7 +329,7 @@ export const cancelNFCe = (
           headers: {
             Authorization: authorization,
           },
-          url: `https://managersaas${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/cancela`,
+          url: `https://managersaas${amb}.tecnospeed.com.br:${port}/ManagerAPIWeb/nfce/cancela`,
           method: 'POST',
           qs: form,
         },
