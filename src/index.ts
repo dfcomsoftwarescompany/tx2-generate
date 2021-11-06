@@ -63,16 +63,16 @@ const createDadosItens = (caminhoTx2: string, itens: Array<any>) => {
   });
 };
 
-const createPagamentos = (caminhoTx2: string, pagamentos: Array<any>) => {
+const createPagamentos = (caminhoTx2: string, pagamentos: Array<any>, type: string) => {
   return new Promise((resolve) => {
     pagamentos.forEach((pagamento) => {
       //  Cabeçalho dos dados da nota.
-      fs.appendFileSync(caminhoTx2, '\nINCLUIRPARTE=YA');
+      fs.appendFileSync(caminhoTx2, '\nINCLUIRPARTE=' + type);
       const keys = Object.keys(pagamento);
       keys.forEach((key: string) => {
         fs.appendFileSync(caminhoTx2, `\n${key}=${pagamento[key]}`);
       });
-      fs.appendFileSync(caminhoTx2, '\nSALVARPARTE=YA');
+      fs.appendFileSync(caminhoTx2, '\nSALVARPARTE=' + type);
       resolve('Dados do pagamento criados com sucesso.');
     });
   });
@@ -290,7 +290,7 @@ export const generateNFCeTx2 = (
       await createDadosEmitente(caminhoTx2, dadosEmitente);
       await createDadosItens(caminhoTx2, itens);
       await createAuthGetXml(caminhoTx2, cnpjAutorizado, cpfAutorizado);
-      await createPagamentos(caminhoTx2, pagamentos);
+      await createPagamentos(caminhoTx2, pagamentos, 'YA');
       await createTotalizadores(caminhoTx2, totalizadores);
       await createTecnico(caminhoTx2, tecnico);
       resolve(caminhoTx2);
@@ -382,8 +382,37 @@ export const generateNFeTx2 = (
       await createDadosDestinatario(caminhoTx2, dadosDestinatario);
       await createAuthGetXml(caminhoTx2, cnpjAutorizado, cpfAutorizado);
       await createDadosItens(caminhoTx2, itens);
-      await createPagamentos(caminhoTx2, pagamentos);
+      await createPagamentos(caminhoTx2, pagamentos, 'YA');
       await createTotalizadores(caminhoTx2, totalizadores);
+      await createTecnico(caminhoTx2, tecnico);
+      resolve(caminhoTx2);
+    }
+  });
+};
+
+/**
+ * Gera o arquivo tx2 (para NFe) no caminho especificado.
+ * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
+ * @param dadosNota um objeto contendo os dados iniciais da nota.
+ * @param itens um array contendo objetos com os dados dos itens.
+ * @param pagamentos um array contendo as informações das formas de pagamento utilizadas.
+ * @return retorna uma string do caminho onde o arquivo foi gerado
+ */
+export const generateMFeTx2 = (
+  caminhoTx2: string,
+  dadosNota: DadosNota | any,
+  itens: Array<DadosItem> | any,
+  pagamentos: Array<any>,
+  tecnico: Tecnico,
+) => {
+  return new Promise(async (resolve, reject) => {
+    if (fs.existsSync(caminhoTx2)) {
+      reject('Já existe um tx2 no caminho especificado.');
+    } else {
+      await createHeader(caminhoTx2);
+      await createDadosNota(caminhoTx2, dadosNota);
+      await createDadosItens(caminhoTx2, itens);
+      await createPagamentos(caminhoTx2, pagamentos, 'PAGAMENTO');
       await createTecnico(caminhoTx2, tecnico);
       resolve(caminhoTx2);
     }
