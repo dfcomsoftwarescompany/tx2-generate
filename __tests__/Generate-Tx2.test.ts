@@ -4,23 +4,19 @@ import * as randomstring from 'randomstring';
 
 describe('Generate tx2 types', () => {
   it('MF-e', () => {
-    const tx2FileName =
-      randomstring.generate({
-        length: 12,
-        charset: 'alphabetic',
-      }) + '.tx2';
+    if (!fs.existsSync('__test__/files/mfe/tx2')) fs.mkdirSync('__test__/files/mfe/tx2', { recursive: true });
+
+    const tx2FileName = 'test.tx2';
 
     const tx2 = generateMFeTx2(
-      `nfces/tx2/test.tx2`,
+      `__test__/files/mfe/tx2/${tx2FileName}`,
       invoiceInformation,
       [invoiceItems],
       [invoicePayment],
       invoiceTechnical,
     );
 
-    if (!fs.existsSync('nfces/tx2')) fs.mkdirSync('nfces/tx2', { recursive: true });
-
-    expect(tx2).toBe(1);
+    expect(tx2).toBe(tx2);
   });
 });
 
@@ -41,14 +37,14 @@ const invoiceItems = {
   NCM_I05: '74182000',
   CFOP_I06: '5405',
   uCom_I07: 'PC',
-  qCom_I08: '1.0',
-  vUnCom_I09: '1.0',
+  qCom_I08: '1.0000',
+  vUnCom_I09: '1.00',
   indRegra_I11: 'A',
   Orig_N06: '0',
   CSOSN_N10: '102',
   CST_Q07: '49',
   CST_S07: '49',
-  vItem12741_M02: '1.0',
+  vItem12741_M02: '1.00',
 };
 
 const invoicePayment = {
