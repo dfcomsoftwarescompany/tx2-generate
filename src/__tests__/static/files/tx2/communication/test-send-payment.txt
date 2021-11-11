@@ -1,0 +1,14 @@
+Formato=TX2
+Interface=EnviarPagamento
+NumeroDocumento=11155
+ChaveAcessoValidador=25CFE38D-3B92-46C0-91CA-CFF751A82D3D
+ChaveRequisicao=26359854-5698-1365-9856-965478231456
+Estabelecimento=123456
+CNPJ=08723218000186
+IcmsBase=50.00
+ValorTotalVenda=50.00
+HabilitarMultiplosPagamentos=false
+HabilitarControleAntiFraude=false
+CodigoMoeda=BRL
+EmitirCupomNFCE=false
+OrigemPagamento=1

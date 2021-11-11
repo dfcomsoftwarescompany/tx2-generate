@@ -8,6 +8,7 @@ import Pagamento from './interfaces/pagamento.interface';
 import * as querystring from 'querystring';
 import * as fs from 'fs';
 import * as request from 'request';
+import { posDataInformationInterface } from './interfaces/postDataInformation.interface';
 
 const createHeader = (caminhoTx2: string) => {
   return new Promise((resolve) => {
@@ -146,7 +147,7 @@ export const sendNFCe = (
         method: 'POST',
         body: formData,
       },
-      (err, resp, body) => {
+      (err: any, resp: any, body: any) => {
         if (err) reject(err);
         else {
           resolve(body);
@@ -190,7 +191,7 @@ export const sendNFe = (
         method: 'POST',
         body: formData,
       },
-      (err, resp, body) => {
+      (err: any, resp: any, body: any) => {
         if (err) reject(err);
         else {
           resolve(body);
@@ -233,7 +234,7 @@ export const print = async (
         method: 'GET',
         qs: form,
       },
-      (err, resp, body) => {
+      (err: any, resp: any, body: any) => {
         if (err) reject(err);
         else {
           resolve(body);
@@ -333,7 +334,7 @@ export const cancelNFCe = (
           method: 'POST',
           qs: form,
         },
-        (err, resp, body) => {
+        (err: any, resp: any, body: any) => {
           if (err) reject(err);
           else {
             resolve(body);
@@ -414,6 +415,71 @@ export const generateMFeTx2 = (
       await createDadosItens(caminhoTx2, itens);
       await createPagamentos(caminhoTx2, pagamentos, 'PAGAMENTO');
       await createTecnico(caminhoTx2, tecnico);
+      resolve(caminhoTx2);
+    }
+  });
+};
+
+/**
+ * Gera o arquivo tx2 (para NFe) no caminho especificado.
+ * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
+ * @param posDataInformation Informações para emitir o tx2
+ * @return retorna uma string do caminho onde o arquivo foi gerado
+ */
+export const sendPaymentMfeTx2 = (caminhoTx2: string, posDataInformation: posDataInformationInterface) => {
+  return new Promise(async (resolve, reject) => {
+    if (fs.existsSync(caminhoTx2)) {
+      reject('Já existe um tx2 no caminho especificado.');
+    } else {
+      // IcmsBase= eduardo informou para que seja o valor da venda
+      fs.appendFileSync(
+        caminhoTx2,
+        `Formato=TX2\nInterface=EnviarPagamento\nNumeroDocumento=${posDataInformation.docNumber}\nChaveAcessoValidador=${posDataInformation.company?.validatorAccessKey}\nChaveRequisicao=${posDataInformation.requestKey}\nEstabelecimento=${posDataInformation.establishment}\nCNPJ=${posDataInformation.company?.cnpj}\nIcmsBase=${posDataInformation.sale?.value}\nValorTotalVenda=${posDataInformation.sale?.value}\nHabilitarMultiplosPagamentos=${posDataInformation.sale?.isMultiplesPayments}\nHabilitarControleAntiFraude=false\nCodigoMoeda=BRL\nEmitirCupomNFCE=false\nOrigemPagamento=1`,
+      );
+      resolve(caminhoTx2);
+    }
+  });
+};
+
+/**
+ * Gera o arquivo tx2 (para NFe) no caminho especificado.
+ * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
+ * @param posDataInformation Informações para emitir o tx2
+ * @return retorna uma string do caminho onde o arquivo foi gerado
+ */
+export const verifyStatusMfeTx2 = (caminhoTx2: string, posDataInformation: posDataInformationInterface) => {
+  return new Promise(async (resolve, reject) => {
+    if (fs.existsSync(caminhoTx2)) {
+      reject('Já existe um tx2 no caminho especificado.');
+    } else {
+      // IcmsBase= eduardo informou para que seja o valor da venda
+      fs.appendFileSync(
+        caminhoTx2,
+        `Formato=TX2\NnumeroDocumento=${posDataInformation.docNumber}\nInterface=VerificarStatusValidador\nChaveAcessoValidador=${posDataInformation.company?.validatorAccessKey}\nIdFila=${posDataInformation.idFila}\nCNPJ=${posDataInformation.company?.cnpj}`,
+      );
+      resolve(caminhoTx2);
+    }
+  });
+};
+
+/**
+ * Gera o arquivo tx2 (para NFe) no caminho especificado.
+ * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
+ * @param posDataInformation Informações para emitir o tx2
+ * @return retorna uma string do caminho onde o arquivo foi gerado
+ */
+export const invoceResponseMfeTx2 = (caminhoTx2: string, posDataInformation: posDataInformationInterface) => {
+  return new Promise(async (resolve, reject) => {
+    if (fs.existsSync(caminhoTx2)) {
+      reject('Já existe um tx2 no caminho especificado.');
+    } else {
+      // IcmsBase= eduardo informou para que seja o valor da venda
+      fs.appendFileSync(
+        caminhoTx2,
+        `formato=tx2\nNumeroDocumento=${posDataInformation.docNumber}\nInterface=RespostaFiscal\nChaveAcessoValidador=${posDataInformation.company?.validatorAccessKey}\nIdFila=${posDataInformation.idFila}\nChaveAcesso=${posDataInformation.requestKey}\nNumeroAprovacao=${posDataInformation.approveCodeNumber}\nBandeira=${posDataInformation.creditCard?.brand}\nAdquirente=${posDataInformation.creditCard?.companyName}\nCNPJ=${posDataInformation.company?.cnpj}\nImpressaoFiscal=<![CDATA[ TANCA
+          ${posDataInformation.printterStringfy}
+        ]]>`,
+      );
       resolve(caminhoTx2);
     }
   });

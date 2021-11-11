@@ -4,6 +4,7 @@ import DadosDestinatario from './interfaces/dadosDestinatario.interface';
 import DadosItem from './interfaces/dadosItem.interface';
 import Totalizadores from './interfaces/totalizadores.interface';
 import Tecnico from './interfaces/tecnico.interface';
+import { posDataInformationInterface } from './interfaces/postDataInformation.interface';
 /**
  * Envia o arquivo tx2 para a api da tecnospeed e retorna a resposta.
  * @param tx2Path o caminho para o arquivo tx2
@@ -71,3 +72,19 @@ export declare const cancelNFCe: (authorization: string, group: string, cnpj: st
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
 export declare const generateNFeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, dadosDestinatario: DadosDestinatario, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico, cnpjAutorizado: string, cpfAutorizado: string) => Promise<unknown>;
+/**
+ * Gera o arquivo tx2 (para NFe) no caminho especificado.
+ * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
+ * @param dadosNota um objeto contendo os dados iniciais da nota.
+ * @param itens um array contendo objetos com os dados dos itens.
+ * @param pagamentos um array contendo as informações das formas de pagamento utilizadas.
+ * @return retorna uma string do caminho onde o arquivo foi gerado
+ */
+export declare const generateMFeTx2: (caminhoTx2: string, dadosNota: DadosNota | any, itens: Array<DadosItem> | any, pagamentos: Array<any>, tecnico: Tecnico) => Promise<unknown>;
+/**
+ * Gera o arquivo tx2 (para NFe) no caminho especificado.
+ * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
+ * @param posDataInformation Informações para emitir o tx2
+ * @return retorna uma string do caminho onde o arquivo foi gerado
+ */
+export declare const sendPaymentMfeTx2: (caminhoTx2: string, posDataInformation: posDataInformationInterface) => Promise<unknown>;
