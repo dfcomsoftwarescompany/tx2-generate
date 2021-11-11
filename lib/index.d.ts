@@ -88,3 +88,17 @@ export declare const generateMFeTx2: (caminhoTx2: string, dadosNota: DadosNota |
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
 export declare const sendPaymentMfeTx2: (caminhoTx2: string, posDataInformation: posDataInformationInterface) => Promise<unknown>;
+/**
+ * Gera o arquivo tx2 (para NFe) no caminho especificado.
+ * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
+ * @param posDataInformation Informações para emitir o tx2
+ * @return retorna uma string do caminho onde o arquivo foi gerado
+ */
+export declare const verifyStatusMfeTx2: (caminhoTx2: string, posDataInformation: posDataInformationInterface) => Promise<unknown>;
+/**
+ * Gera o arquivo tx2 (para NFe) no caminho especificado.
+ * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
+ * @param posDataInformation Informações para emitir o tx2
+ * @return retorna uma string do caminho onde o arquivo foi gerado
+ */
+export declare const invoceResponseMfeTx2: (caminhoTx2: string, posDataInformation: posDataInformationInterface) => Promise<unknown>;
