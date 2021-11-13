@@ -16,5 +16,5 @@ export interface posDataInformationInterface {
         brand?: string;
         companyName?: string;
     };
-    printterStringfy?: string;
+    printerStringify?: string;
 }

@@ -477,7 +477,7 @@ export const invoceResponseMfeTx2 = (caminhoTx2: string, posDataInformation: pos
       fs.appendFileSync(
         caminhoTx2,
         `formato=tx2\nNumeroDocumento=${posDataInformation.docNumber}\nInterface=RespostaFiscal\nChaveAcessoValidador=${posDataInformation.company?.validatorAccessKey}\nIdFila=${posDataInformation.idFila}\nChaveAcesso=${posDataInformation.requestKey}\nNumeroAprovacao=${posDataInformation.approveCodeNumber}\nBandeira=${posDataInformation.creditCard?.brand}\nAdquirente=${posDataInformation.creditCard?.companyName}\nCNPJ=${posDataInformation.company?.cnpj}\nImpressaoFiscal=<![CDATA[ TANCA
-          ${posDataInformation.printterStringfy}
+          ${posDataInformation.printerStringify}
         ]]>`,
       );
       resolve(caminhoTx2);
