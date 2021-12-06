@@ -8,7 +8,7 @@ import Pagamento from './interfaces/pagamento.interface';
 import * as querystring from 'querystring';
 import * as fs from 'fs';
 import * as request from 'request';
-import { posDataInformationInterface } from './interfaces/postDataInformation.interface';
+import { PosDataInformationInterface } from './interfaces/postDataInformation.interface';
 
 const createHeader = (caminhoTx2: string) => {
   return new Promise((resolve) => {
@@ -426,7 +426,7 @@ export const generateMFeTx2 = (
  * @param posDataInformation Informações para emitir o tx2
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export const sendPaymentMfeTx2 = (caminhoTx2: string, posDataInformation: posDataInformationInterface) => {
+export const sendPaymentMfeTx2 = (caminhoTx2: string, posDataInformation: PosDataInformationInterface) => {
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(caminhoTx2)) {
       reject('Já existe um tx2 no caminho especificado.');
@@ -447,7 +447,7 @@ export const sendPaymentMfeTx2 = (caminhoTx2: string, posDataInformation: posDat
  * @param posDataInformation Informações para emitir o tx2
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export const verifyStatusMfeTx2 = (caminhoTx2: string, posDataInformation: posDataInformationInterface) => {
+export const verifyStatusMfeTx2 = (caminhoTx2: string, posDataInformation: PosDataInformationInterface) => {
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(caminhoTx2)) {
       reject('Já existe um tx2 no caminho especificado.');
@@ -468,7 +468,7 @@ export const verifyStatusMfeTx2 = (caminhoTx2: string, posDataInformation: posDa
  * @param posDataInformation Informações para emitir o tx2
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export const invoceResponseMfeTx2 = (caminhoTx2: string, posDataInformation: posDataInformationInterface) => {
+export const invoceResponseMfeTx2 = (caminhoTx2: string, posDataInformation: PosDataInformationInterface) => {
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(caminhoTx2)) {
       reject('Já existe um tx2 no caminho especificado.');

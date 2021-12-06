@@ -43,6 +43,7 @@ describe('Generate tx2 types', () => {
       },
     });
 
+    fs.rmdirSync(path.resolve(__dirname, 'static'), { recursive: true });
     expect(1).toBe(1);
   });
 

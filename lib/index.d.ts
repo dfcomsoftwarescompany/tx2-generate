@@ -4,7 +4,7 @@ import DadosDestinatario from './interfaces/dadosDestinatario.interface';
 import DadosItem from './interfaces/dadosItem.interface';
 import Totalizadores from './interfaces/totalizadores.interface';
 import Tecnico from './interfaces/tecnico.interface';
-import { posDataInformationInterface } from './interfaces/postDataInformation.interface';
+import { PosDataInformationInterface } from './interfaces/postDataInformation.interface';
 /**
  * Envia o arquivo tx2 para a api da tecnospeed e retorna a resposta.
  * @param tx2Path o caminho para o arquivo tx2
@@ -87,18 +87,18 @@ export declare const generateMFeTx2: (caminhoTx2: string, dadosNota: DadosNota |
  * @param posDataInformation Informações para emitir o tx2
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export declare const sendPaymentMfeTx2: (caminhoTx2: string, posDataInformation: posDataInformationInterface) => Promise<unknown>;
+export declare const sendPaymentMfeTx2: (caminhoTx2: string, posDataInformation: PosDataInformationInterface) => Promise<unknown>;
 /**
  * Gera o arquivo tx2 (para NFe) no caminho especificado.
  * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
  * @param posDataInformation Informações para emitir o tx2
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export declare const verifyStatusMfeTx2: (caminhoTx2: string, posDataInformation: posDataInformationInterface) => Promise<unknown>;
+export declare const verifyStatusMfeTx2: (caminhoTx2: string, posDataInformation: PosDataInformationInterface) => Promise<unknown>;
 /**
  * Gera o arquivo tx2 (para NFe) no caminho especificado.
  * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)
  * @param posDataInformation Informações para emitir o tx2
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export declare const invoceResponseMfeTx2: (caminhoTx2: string, posDataInformation: posDataInformationInterface) => Promise<unknown>;
+export declare const invoceResponseMfeTx2: (caminhoTx2: string, posDataInformation: PosDataInformationInterface) => Promise<unknown>;
