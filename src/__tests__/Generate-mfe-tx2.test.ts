@@ -4,14 +4,6 @@ import { generateMFeTx2, invoceResponseMfeTx2, sendPaymentMfeTx2 } from '../inde
 import path = require('path');
 
 describe('Generate tx2 types', () => {
-  beforeAll(() => {
-    return console.log('before');
-  });
-
-  afterAll(() => {
-    return console.log('after');
-  });
-
   it('MF-e', () => {
     const dirPath = path.resolve(__dirname, 'static', 'files', 'tx2', 'communication');
     baseModelTest.createFilePath(dirPath);
@@ -51,7 +43,6 @@ describe('Generate tx2 types', () => {
       },
     });
 
-    //fs.rmdirSync(path.resolve(__dirname, 'static'), { recursive: true });
     expect(1).toBe(1);
   });
 

@@ -1,4 +1,4 @@
-export interface posDataInformationInterface {
+export interface PosDataInformationInterface {
   docNumber?: string;
   company?: {
     cnpj?: string;
