@@ -455,7 +455,7 @@ export const verifyStatusMfeTx2 = (caminhoTx2: string, posDataInformation: PosDa
       // IcmsBase= eduardo informou para que seja o valor da venda
       fs.appendFileSync(
         caminhoTx2,
-        `Formato=TX2\NnumeroDocumento=${posDataInformation.docNumber}\nInterface=VerificarStatusValidador\nChaveAcessoValidador=${posDataInformation.company?.validatorAccessKey}\nIdFila=${posDataInformation.idFila}\nCNPJ=${posDataInformation.company?.cnpj}`,
+        `Formato=TX2\nnumeroDocumento=${posDataInformation.docNumber}\nInterface=VerificarStatusValidador\nChaveAcessoValidador=${posDataInformation.company?.validatorAccessKey}\nIdFila=${posDataInformation.idFila}\nCNPJ=${posDataInformation.company?.cnpj}`,
       );
       resolve(caminhoTx2);
     }
