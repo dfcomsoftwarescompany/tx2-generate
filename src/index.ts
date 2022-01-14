@@ -434,7 +434,7 @@ export const sendPaymentMfeTx2 = (caminhoTx2: string, posDataInformation: PosDat
       // IcmsBase= eduardo informou para que seja o valor da venda
       fs.appendFileSync(
         caminhoTx2,
-        `Formato=TX2\nInterface=EnviarPagamento\nNumeroDocumento=${posDataInformation.docNumber}\nChaveAcessoValidador=${posDataInformation.company?.validatorAccessKey}\nChaveRequisicao=${posDataInformation.requestKey}\nEstabelecimento=${posDataInformation.establishment}\nCNPJ=${posDataInformation.company?.cnpj}\nIcmsBase=${posDataInformation.sale?.value}\nValorTotalVenda=${posDataInformation.sale?.value}\nHabilitarMultiplosPagamentos=${posDataInformation.sale?.isMultiplesPayments}\nHabilitarControleAntiFraude=false\nCodigoMoeda=BRL\nEmitirCupomNFCE=false\nOrigemPagamento=1`,
+        `Formato=TX2\nInterface=EnviarPagamento\nNumeroDocumento=${posDataInformation.docNumber}\nChaveAcessoValidador=${posDataInformation.company?.validatorAccessKey}\nChaveRequisicao=${posDataInformation.requestKey}\nEstabelecimento=${posDataInformation.establishment}\nCNPJ=${posDataInformation.company?.cnpj}\nIcmsBase=${posDataInformation.sale?.value}\nValorTotalVenda=${posDataInformation.sale?.value}\nHabilitarMultiplosPagamentos=${posDataInformation.sale?.isMultiplesPayments}\nHabilitarControleAntiFraude=false\nCodigoMoeda=BRL\nEmitirCupomNFCE=false\nOrigemPagamento=1\nSerialPOS=${posDataInformation.serialPOS}\n`,
       );
       resolve(caminhoTx2);
     }

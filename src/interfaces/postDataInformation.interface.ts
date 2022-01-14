@@ -17,4 +17,5 @@ export interface PosDataInformationInterface {
     companyName?: string;
   };
   printerStringify?: string;
+  serialPOS: string;
 }
