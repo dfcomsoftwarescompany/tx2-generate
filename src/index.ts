@@ -113,6 +113,16 @@ const createTecnico = (caminhoTx2: string, tecnico: any) => {
   });
 };
 
+const createObservacoes = (caminhoTx2: string, obs: any) => {
+  return new Promise((resolve) => {
+    const keys = Object.keys(obs);
+    keys.forEach((key: string) => {
+      fs.appendFileSync(caminhoTx2, `\n${key}=${obs[key]}`);
+    });
+    resolve('Dados do pagamento criados com sucesso.');
+  });
+};
+
 /**
  * Envia o arquivo tx2 para a api da tecnospeed e retorna a resposta.
  * @param tx2Path o caminho para o arquivo tx2
@@ -269,6 +279,7 @@ export const generatecNF_B03 = (): Promise<string> => {
  * @param totalizadores um objeto contendo os dados dos totalizadores.
  * @param tecnico um objeto contendo as informações do responsável técnico.
  * @param cnpjAutorizado Autorização para obter XML
+ * @param observacoes Observações
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
 export const generateNFCeTx2 = (
@@ -281,6 +292,7 @@ export const generateNFCeTx2 = (
   tecnico: Tecnico,
   cnpjAutorizado: string,
   cpfAutorizado: string,
+  observacoes: any,
 ): Promise<string> => {
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(caminhoTx2)) {
@@ -288,6 +300,7 @@ export const generateNFCeTx2 = (
     } else {
       await createHeader(caminhoTx2);
       await createDadosNota(caminhoTx2, dadosNota);
+      await createObservacoes(caminhoTx2, observacoes);
       await createDadosEmitente(caminhoTx2, dadosEmitente);
       await createDadosItens(caminhoTx2, itens);
       await createAuthGetXml(caminhoTx2, cnpjAutorizado, cpfAutorizado);
@@ -359,6 +372,7 @@ export const cancelNFCe = (
  * @param tecnico um objeto contendo as informações do responsável técnico.
  * @param cnpjAutorizado Autorização para obter XML
  * @param cpfAutorizado Autorização para obter XML
+ * @param observacoes Observações
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
 export const generateNFeTx2 = (
@@ -372,6 +386,7 @@ export const generateNFeTx2 = (
   tecnico: Tecnico,
   cnpjAutorizado: string,
   cpfAutorizado: string,
+  observacoes: any,
 ) => {
   return new Promise(async (resolve, reject) => {
     if (fs.existsSync(caminhoTx2)) {
@@ -379,6 +394,7 @@ export const generateNFeTx2 = (
     } else {
       await createHeader(caminhoTx2);
       await createDadosNota(caminhoTx2, dadosNota);
+      await createObservacoes(caminhoTx2, observacoes);
       await createDadosEmitente(caminhoTx2, dadosEmitente);
       await createDadosDestinatario(caminhoTx2, dadosDestinatario);
       await createAuthGetXml(caminhoTx2, cnpjAutorizado, cpfAutorizado);

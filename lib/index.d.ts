@@ -44,9 +44,10 @@ export declare const generatecNF_B03: () => Promise<string>;
  * @param totalizadores um objeto contendo os dados dos totalizadores.
  * @param tecnico um objeto contendo as informações do responsável técnico.
  * @param cnpjAutorizado Autorização para obter XML
+ * @param observacoes Observações
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export declare const generateNFCeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico, cnpjAutorizado: string, cpfAutorizado: string) => Promise<string>;
+export declare const generateNFCeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico, cnpjAutorizado: string, cpfAutorizado: string, observacoes: any) => Promise<string>;
 /**
  * Cancela uma NFCe.
  * @param authorization the header authrization string (base 64).
@@ -69,9 +70,10 @@ export declare const cancelNFCe: (authorization: string, group: string, cnpj: st
  * @param tecnico um objeto contendo as informações do responsável técnico.
  * @param cnpjAutorizado Autorização para obter XML
  * @param cpfAutorizado Autorização para obter XML
+ * @param observacoes Observações
  * @return retorna uma string do caminho onde o arquivo foi gerado
  */
-export declare const generateNFeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, dadosDestinatario: DadosDestinatario, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico, cnpjAutorizado: string, cpfAutorizado: string) => Promise<unknown>;
+export declare const generateNFeTx2: (caminhoTx2: string, dadosNota: DadosNota, dadosEmitente: DadosEmitente, dadosDestinatario: DadosDestinatario, itens: Array<DadosItem>, pagamentos: Array<any>, totalizadores: Totalizadores, tecnico: Tecnico, cnpjAutorizado: string, cpfAutorizado: string, observacoes: any) => Promise<unknown>;
 /**
  * Gera o arquivo tx2 (para NFe) no caminho especificado.
  * @param caminhoTx2 o caminho onde o tx2 será gerado (um arquivo com o mesmo nome não pode existir)

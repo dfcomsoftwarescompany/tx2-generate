@@ -64,13 +64,11 @@
 //         brand: 'VISA',
 //         companyName: 'ADAPTADO_SUCESSO',
 //       },
-//       printterStringfy: `        
+//       printterStringfy: `
 // TANCA INFORMATICA EIRELI
-
 
 // RUA MARECHAL FLORIANO PEIXOTO, 166,
 // VILA MARCONDES, PRESIDENTE PRUDENTE
-
 
 // CNPJ IE IM
 // 08.723.218/0001-86 562377111111
@@ -83,26 +81,22 @@
 
 // # COD DESC QTD UNVL UN (VL TR VL ITEM
 //   R$ R$)* R$
-  
+
 //   1 16 Bolinho de Bacalhau 1,000UN X 10,00
 //   10,00 (0.40)
-  
+
 //   rateio de desconto sobre o subtotal 0.00
 //   rateio de acréscimo sobre o subtotal 0.00
 
 //   Total bruto de itens 10,00
 //   Total de descontos/acréscimos 0,00
-  
+
 //   TOTAL R$ 10,00
-  
 
 //   FORMA PAGAMENTO VALOR PAGO R$
 //   Cartão de Crédito 10.00
-  
-  
-//   12345678901234567890 -
-  
 
+//   12345678901234567890 -
 
 //   OBSERVA�?�?ES DO CONTRIBUINTE
 
@@ -110,22 +104,18 @@
 //   Obrigado pela Preferencia Volte
 // Semprewww.programaconsumer.com.br
 
-
 // *Valor aproximado dos tributos
 // do itemValor aproximado dos
 // tributos deste cupom(conforme
 //   Lei Fed.12.741/2012) R$ 0,40
-  
-  
-  
+
 //   SAT No.
 //   900.014.537
 //   17/05/2018 -
 //   11:42:25
 //   3518 0508 7232 1800 0186 5990 0014 5370 0006
 //   3731 0995
-  
-  
+
 //   <urlqrcode>35180508723218000186599000145370000637310995|20180517114225|10.00||RMpOVbDrDrJZByOK2obQWBvRbpzt+JJp9gSIDuloQnz3gLc2lXc2+syVL/tN26vVU7R6FylVemYIomRA2CC1Ji8W3Wmjts6cVz4or+D9TeX0TWg5HYRZyJH/34DHThM1DOA+3oaXS5OKmxJnb5lggI/fbIRjf2Je2/5WXB20y6+hwyp+XmCpknPKs5EvFnU229YHup74VwVoDGTeUlCYubd1OvoADqmij5AmIHEudbg6h+pAm47T4GlTIzlpzQl+nXwad9zSQ3zGBl85QXhzz7+3VaSsu11LtxRInfjnavE42JdEfD6tjIgM00G4abbAAY75M98KQTKCXIKxLR4EYA==</urlqrcode>]]>`,
 //     };
 
