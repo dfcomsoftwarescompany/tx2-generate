@@ -300,13 +300,13 @@ export const generateNFCeTx2 = (
     } else {
       await createHeader(caminhoTx2);
       await createDadosNota(caminhoTx2, dadosNota);
-      await createObservacoes(caminhoTx2, observacoes);
       await createDadosEmitente(caminhoTx2, dadosEmitente);
       await createDadosItens(caminhoTx2, itens);
       await createAuthGetXml(caminhoTx2, cnpjAutorizado, cpfAutorizado);
       await createPagamentos(caminhoTx2, pagamentos, 'YA');
       await createTotalizadores(caminhoTx2, totalizadores);
       await createTecnico(caminhoTx2, tecnico);
+      await createObservacoes(caminhoTx2, observacoes);
       resolve(caminhoTx2);
     }
   });
@@ -394,7 +394,6 @@ export const generateNFeTx2 = (
     } else {
       await createHeader(caminhoTx2);
       await createDadosNota(caminhoTx2, dadosNota);
-      await createObservacoes(caminhoTx2, observacoes);
       await createDadosEmitente(caminhoTx2, dadosEmitente);
       await createDadosDestinatario(caminhoTx2, dadosDestinatario);
       await createAuthGetXml(caminhoTx2, cnpjAutorizado, cpfAutorizado);
@@ -402,6 +401,7 @@ export const generateNFeTx2 = (
       await createPagamentos(caminhoTx2, pagamentos, 'YA');
       await createTotalizadores(caminhoTx2, totalizadores);
       await createTecnico(caminhoTx2, tecnico);
+      await createObservacoes(caminhoTx2, observacoes);
       resolve(caminhoTx2);
     }
   });
