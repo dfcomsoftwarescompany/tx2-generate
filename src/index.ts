@@ -103,12 +103,10 @@ const createAuthGetXml = (caminhoTx2: string, cnpj: string = '', cpf: string = '
 
 const createTecnico = (caminhoTx2: string, tecnico: any) => {
   return new Promise((resolve) => {
-    // Cabeçalho dos dados da nota.
     const keys = Object.keys(tecnico);
     keys.forEach((key: string) => {
       fs.appendFileSync(caminhoTx2, `\n${key}=${tecnico[key]}`);
     });
-    fs.appendFileSync(caminhoTx2, '\n\nSALVAR');
     resolve('Dados do pagamento criados com sucesso.');
   });
 };
@@ -119,6 +117,7 @@ const createObservacoes = (caminhoTx2: string, obs: any) => {
     keys.forEach((key: string) => {
       fs.appendFileSync(caminhoTx2, `\n${key}=${obs[key]}`);
     });
+    fs.appendFileSync(caminhoTx2, '\n\nSALVAR');
     resolve('Dados do pagamento criados com sucesso.');
   });
 };
