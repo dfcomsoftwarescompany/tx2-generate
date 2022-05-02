@@ -117,6 +117,12 @@ const createObservacoes = (caminhoTx2: string, obs: any) => {
     keys.forEach((key: string) => {
       fs.appendFileSync(caminhoTx2, `\n${key}=${obs[key]}`);
     });
+    resolve('Dados do pagamento criados com sucesso.');
+  });
+};
+
+const closeFile = (caminhoTx2: string) => {
+  return new Promise((resolve) => {
     fs.appendFileSync(caminhoTx2, '\n\nSALVAR');
     resolve('Dados do pagamento criados com sucesso.');
   });
@@ -306,6 +312,7 @@ export const generateNFCeTx2 = (
       await createTotalizadores(caminhoTx2, totalizadores);
       await createTecnico(caminhoTx2, tecnico);
       await createObservacoes(caminhoTx2, observacoes);
+      await closeFile(caminhoTx2);
       resolve(caminhoTx2);
     }
   });
@@ -401,6 +408,7 @@ export const generateNFeTx2 = (
       await createTotalizadores(caminhoTx2, totalizadores);
       await createTecnico(caminhoTx2, tecnico);
       await createObservacoes(caminhoTx2, observacoes);
+      await closeFile(caminhoTx2);
       resolve(caminhoTx2);
     }
   });
@@ -430,6 +438,7 @@ export const generateMFeTx2 = (
       await createDadosItens(caminhoTx2, itens);
       await createPagamentos(caminhoTx2, pagamentos, 'PAGAMENTO');
       await createTecnico(caminhoTx2, tecnico);
+      await closeFile(caminhoTx2);
       resolve(caminhoTx2);
     }
   });
